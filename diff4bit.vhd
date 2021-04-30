@@ -36,6 +36,7 @@ BEGIN
   bit1 : fullAdder port map (A(1), NOT b(1), CARRY_AUX(0), RESULT_AUX(1), CARRY_AUX(1));
   bit2 : fullAdder port map (A(2), NOT b(2), CARRY_AUX(1), RESULT_AUX(2), CARRY_AUX(2));
   bit3 : fullAdder port map (A(3), NOT b(3), CARRY_AUX(2), RESULT_AUX(3), CARRY_AUX(3));
+  
 
   result <= RESULT_AUX;
   carry <= CARRY_AUX;

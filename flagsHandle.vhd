@@ -25,7 +25,7 @@ ARCHITECTURE behav OF flagsHandle IS
   SIGNAL B_TWO_COMPLIMENT : STD_LOGIC_VECTOR(3 DOWNTO 0); -- Complemento a 2 de B
 
 BEGIN
-  PROCESS (sum_result, sum_carry, selection)
+  PROCESS (A,B,sum_result, sum_carry, subtract_result, subtract_carry, B_TWO_COMPLIMENT,selection)
   BEGIN
     LEDG <= "0000";
     B_TWO_COMPLIMENT <= ((NOT B) + "0001");
@@ -80,6 +80,7 @@ BEGIN
         LEDG(3) <= '1';
       END IF;
     END IF;
+
 
   END PROCESS;
 END behav;

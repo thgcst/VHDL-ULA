@@ -8,7 +8,7 @@ ENTITY main IS PORT (
   G_CLOCK_50 : IN STD_LOGIC;
   SW : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
   LEDG : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
-  LEDR : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
+  LEDR : OUT STD_LOGIC_VECTOR(17 DOWNTO 0);
   HEX0 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
   HEX1 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
   HEX3 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
@@ -31,7 +31,7 @@ ARCHITECTURE hardware OF main IS
   SIGNAL subtract_carry : STD_LOGIC_VECTOR(3 DOWNTO 0); -- Carry Out da subtração
 
   -- Módulo Display de 7 segmentos
-  COMPONENT dec7seg IS PORT ( 
+  COMPONENT dec7seg IS PORT (
     hex_digit : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
     segment_7dis : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
     minus : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
@@ -77,6 +77,15 @@ ARCHITECTURE hardware OF main IS
     );
   END COMPONENT;
 
+  -- Módulo que lida com os Leds vermelhos
+  COMPONENT redLedsHandle IS PORT (
+    A : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+    B : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+    result : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+    LEDR : OUT STD_LOGIC_VECTOR(17 DOWNTO 0)
+    );
+  END COMPONENT;
+
 BEGIN
 
   auto_clock : clock port map (G_CLOCK_50, A, B);
@@ -112,6 +121,6 @@ BEGIN
   digitB_7segments : dec7seg port map (B, HEX4, HEX5); -- Display B
   digitA_7segments : dec7seg port map (A, HEX6, HEX7); -- Display A
 
-  LEDR <= selection; -- Leds vermelhos mostram, em binário, a operação sendo executada
+  redLeds : redLedsHandle port map (A, B, RESULT, LEDR); -- Leds Vermelhos
 
 END hardware;
