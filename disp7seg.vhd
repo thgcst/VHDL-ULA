@@ -3,14 +3,14 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 USE ieee.std_logic_unsigned.ALL;
 
-ENTITY dec7seg IS PORT (
+ENTITY disp7seg IS PORT (
   hex_digit : IN STD_LOGIC_VECTOR(3 DOWNTO 0); -- Binário a ser exibido como Hexadecimal
   segment_7dis : OUT STD_LOGIC_VECTOR(6 DOWNTO 0); -- Display a exibir o valor absoluto
   minus : OUT STD_LOGIC_VECTOR(6 DOWNTO 0) -- Display a exibir o sinal de negativo (caso seja)
 );
-END dec7seg;
+END disp7seg;
 
-ARCHITECTURE arch_dec OF dec7seg IS
+ARCHITECTURE arch_dec OF disp7seg IS
   SIGNAL segment_data : STD_LOGIC_VECTOR(6 DOWNTO 0);
 BEGIN
   PROCESS (hex_digit)
