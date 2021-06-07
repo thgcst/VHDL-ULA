@@ -21,7 +21,7 @@ BEGIN
       minus <= "1111111"; -- Não exibe nada
     END IF;
 
-    CASE hex_digit IS -- Exibe o valor absoluto no display de 7 seguimentos
+    CASE hex_digit IS -- Exibe o valor absoluto no display de 7 segmentos
       WHEN "0000" => segment_data <= "1000000";
       WHEN "0001" => segment_data <= "1111001";
       WHEN "0010" => segment_data <= "0100100";
